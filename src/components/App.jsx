@@ -4,13 +4,12 @@ import {
   Route,
 } from 'react-router-dom';
 import MainPage from './MainPage';
+import Header from './Header';
 
 export default function App() {
   return (
     <div className="container">
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-      </Routes>
+      <Header />
     </div>
   );
 }
