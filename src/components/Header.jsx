@@ -6,29 +6,47 @@ import {
 
 import Registration from './Registration';
 
-export default function Header() {
+export default function Header({ currUser, logOutHandler }) {
+  console.log('HEADER USER ________________>', currUser);
   return (
     <Navbar sticky="top" collapseOnSelect expand="lg" bg="success" variant="dark">
-      <Container>
+      <Container style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
         <Navbar.Brand href="/">
           Biking
         </Navbar.Brand>
+        {currUser.id ? (
+          <Navbar.Text>
+            Привет,
+            {' '}
+            {currUser.name}
+          </Navbar.Text>
+        ) : ((<Navbar.Text>Привет, гость!</Navbar.Text>))}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="container-fluid">
-          <Nav style={{ justifyContent: 'space-between' }}>
+          <Nav>
             <NavDropdown
               title="Меню"
               id="basic-nav-dropdown"
               className="me-2 mb-2 mb-lg-0"
             >
-              <NavDropdown.Item href="#action/3.1">Home</NavDropdown.Item>
-              <NavDropdown.Item href="/auth/registration">
-                Личный кабинет
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/auth/authorization">Контакты</NavDropdown.Item>
+              {currUser.id ? (
+                <NavDropdown.Item>
+                  <button type="submit" onClick={logOutHandler}>Выйти</button>
+                  {' '}
+                </NavDropdown.Item>
+              ) : (
+                <>
+                  <NavDropdown.Item href="/authorization">Личный кабинет</NavDropdown.Item>
+                  {/* <NavDropdown.Item href="/auth/registration">Зарегестрироваться</NavDropdown.Item> */}
+                  <NavDropdown.Item href="/registration">Зарегестрироваться</NavDropdown.Item>
+                </>
+              )}
+              {/* <NavDropdown.Item href="/auth/authorization">Контакты</NavDropdown.Item> */}
+              <NavDropdown.Item href="/contacts">Контакты</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
+
       </Container>
     </Navbar>
   );

@@ -36,8 +36,15 @@ app.engine('jsx', customRender);
 app.set('views', path.join(__dirname, 'components'));
 app.set('view engine', 'jsx');
 
+app.use((req, res, next) => {
+  // console.log(res.locals);
+  res.locals.user = req.session?.user;
+  res.locals.path = req.originalUrl;
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/api/v1', apiRouter);
-app.use('/auth', userRouter);
+// app.use('/auth', userRouter);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
