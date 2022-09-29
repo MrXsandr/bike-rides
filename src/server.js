@@ -6,6 +6,7 @@ import store from 'session-file-store';
 import customRender from './utils/customRender';
 import indexRouter from './router/indexRouter';
 import apiRouter from './router/apiRouter';
+import userRouter from './router/userRouter';
 
 require('dotenv').config();
 
@@ -37,5 +38,6 @@ app.set('view engine', 'jsx');
 
 app.use('/', indexRouter);
 app.use('/api/v1', apiRouter);
+app.use('/auth', userRouter);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
