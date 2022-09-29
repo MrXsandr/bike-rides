@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 
-function Registration(setCurrUser) {
+function Registration({ setCurrUser }) {
   const [input, setInput] = useState({
     name: '',
     email: '',
@@ -21,10 +21,8 @@ function Registration(setCurrUser) {
       body: JSON.stringify(input),
     })
       .then((res) => res.json())
-      .then((data) => {
-        setCurrUser(data);
-        navigate('/');
-      });
+      .then((data) => setCurrUser(data))
+      .then(navigate('/'));
   };
 
   return (
