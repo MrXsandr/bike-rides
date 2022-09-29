@@ -1,0 +1,8 @@
+route-1,22,moscow,1
+route-2,22,moscow,2
+route-3,22,moscow,3
+route-4,22,moscow,1
+route-5,22,moscow,2
+route-6,22,moscow,3
+route-7,22,moscow,1
+route-8,22,moscow,2
