@@ -7,6 +7,7 @@ import MainPage from './MainPage';
 import Header from './Header';
 import Registration from './Registration';
 import Authorization from './Authorization';
+import PersonalPage from './PersonalPage';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/auth/auth" element={<PersonalPage />} />
         <Route path="/auth/registration" element={<Registration />} />
         <Route path="/auth/authorization" element={<Authorization />} />
       </Routes>

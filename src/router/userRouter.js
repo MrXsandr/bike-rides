@@ -10,4 +10,8 @@ router.get('/authorization', (req, res) => {
   res.render('Layout', { });
 });
 
+router.get('/auth', (req, res) => {
+  res.render('Layout', { });
+});
+
 export default router;
