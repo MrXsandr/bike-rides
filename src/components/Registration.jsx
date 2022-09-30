@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 
-function Registration(setCurrUser) {
+function Registration({ setCurrUser }) {
   const [input, setInput] = useState({
     name: '',
     email: '',
@@ -21,50 +21,52 @@ function Registration(setCurrUser) {
       body: JSON.stringify(input),
     })
       .then((res) => res.json())
-      .then((data) => {
-        setCurrUser(data);
-        navigate('/');
-      });
+      .then((data) => setCurrUser(data))
+      .then(navigate('/'));
   };
 
   return (
     <Form onSubmit={submitHandler}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          name="name"
-          type="text"
-          placeholder="Enter name"
-          onChange={changeHandler}
-          value={input.name}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          name="email"
-          type="email"
-          placeholder="Enter email"
-          onChange={changeHandler}
-          value={input.email}
-        />
-      </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={changeHandler}
-          value={input.password}
-        />
-      </Form.Group>
+      <div className="login-box">
+        <h2>SignUp</h2>
+        <div className="user-box">
+          <input
+            name="name"
+            type="text"
+            placeholder="Enter name"
+            onChange={changeHandler}
+            value={input.name}
+          />
+          <label>Username</label>
+        </div>
+        <div className="user-box">
+          <input
+            name="email"
+            type="email"
+            placeholder="Enter email"
+            onChange={changeHandler}
+            value={input.email}
+          />
+          <label>Username</label>
+        </div>
+        <div className="user-box">
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            onChange={changeHandler}
+            value={input.password}
+          />
+          <label>Password</label>
+        </div>
+        <div className="wrap">
+          <button className="glow-on-hover">Submit</button>
+        </div>
+      </div>
 
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
     </Form>
+
   );
 }
 

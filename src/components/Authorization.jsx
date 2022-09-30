@@ -24,37 +24,39 @@ export default function Authorization({ setCurrUser }) {
     })
       .then((res) => res.json())
       .then((data) => setCurrUser(data))
-      .then(() => navigate('/')); // для редиректа на главную
+      .then(navigate('/')); // для редиректа на главную
   };
 
   return (
     <Form onSubmit={submitHandler}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={input.email}
-          onChange={inputHandler}
-        />
+      <div className="login-box">
+        <h2>SignUp</h2>
 
-      </Form.Group>
+        <div className="user-box">
+          <input
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={input.email}
+            onChange={inputHandler}
+          />
+          <label>Username</label>
+        </div>
+        <div className="user-box">
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={input.password}
+            onChange={inputHandler}
+          />
+          <label>Password</label>
+        </div>
+        <div className="wrap">
+          <button className="glow-on-hover">Submit</button>
+        </div>
+      </div>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={input.password}
-          onChange={inputHandler}
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-      {err && <p>{err}</p>}
     </Form>
   );
 }
