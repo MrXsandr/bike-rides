@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { load } from '@2gis/mapgl';
 
-export default function MapCard({}) {
+export default function MapCard({ firstPoint, secPoint}) {
   const firstPoint = [37.62223449719688, 55.72907987721382];
   const secPoint = [37.579662475884135, 55.72366633640476];
   //   const markers = [firstPoint, secPoint];
