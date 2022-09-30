@@ -24,7 +24,7 @@ export default function Authorization({ setCurrUser }) {
     })
       .then((res) => res.json())
       .then((data) => setCurrUser(data))
-      .then(() => navigate('/')); // для редиректа на главную
+      .then(navigate('/')); // для редиректа на главную
   };
 
   return (

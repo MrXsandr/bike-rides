@@ -33,9 +33,9 @@ router.post('/', async (req, res) => {
       const user = await User.create({
         ...req.body, password: await bcrypt.hash(password, 5),
       });
-      const curUser = { id: user.id, name: user.name };
-      req.session.user = curUser;
-      return res.json(curUser);
+      const currUser = { id: user.id, name: user.name };
+      req.session.user = currUser;
+      return res.json(currUser);
     } catch {
       return res.sendStatus(500);
     }
@@ -50,9 +50,9 @@ router.post('/', async (req, res) => {
   if (email && password) {
     const user = await User.findOne({ where: { email } });
     if (user && await bcrypt.compare(password, user.password)) {
-      const curUser = { id: user.id, name: user.name };
-      req.session.user = curUser;
-      return res.json(curUser);
+      const currUser = { id: user.id, name: user.name };
+      req.session.user = currUser;
+      return res.json(currUser);
     }
     return res.sendStatus(401);
   }
@@ -98,6 +98,17 @@ router.post('/', async (req, res) => {
   } else {
     return res.sendStatus(401);
   }
+});
+
+// Вывести список отзывов для данного маршрута
+router.get('/', async (req, res) => {
+  const routeReviews = await Review.findAll({
+    include: [{
+      model: Route,
+      where: { id: req.params.id },
+    }],
+  });
+  return res.json(routeReviews);
 });
 
 export default router;

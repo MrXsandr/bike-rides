@@ -1,5 +1,8 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+import {
+  User, Route, Like, Review,
+} from '../../db/models';
 
 const router = express.Router();
 
@@ -42,4 +45,43 @@ router.route('/auth/authorization')
     }
     return res.sendStatus(401);
   });
+
+// Найти все маршруты
+router.get('/routes', async (req, res) => {
+  const routes = await Route.findAll();
+  res.json(routes);
+});
+
+// Показать один маршрут
+router.get('/routes/:route', async (req, res) => {
+  const routeReviews = await Route.findOne({
+    where: { id: req.params.route },
+  });
+  return res.json(routeReviews);
+});
+
+router.get('/routes/:route/reviews', async (req, res) => {
+  const routeReviews = await Review.findAll({
+    where: { routeid: req.params.route },
+  });
+  return res.json(routeReviews);
+});
+
+// Написать отзыв
+router.post('/routes/:route/addReview', async (req, res) => {
+  const { title, text } = req.body;
+  const routeid = req.params.route;
+  const userid = req.session.user.id;
+  if (title && text) {
+    try {
+      const review = await Review.create({ ...req.body, routeid, userid });
+      return res.json(review);
+    } catch {
+      return res.sendStatus(500);
+    }
+  } else {
+    return res.sendStatus(401);
+  }
+});
+
 export default router;
