@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { load } from '@2gis/mapgl';
 
-export default function MapCard({ firstPoint, secPoint}) {
-  const firstPoint = [37.62223449719688, 55.72907987721382];
-  const secPoint = [37.579662475884135, 55.72366633640476];
+export default function MapCard({ firstPoint, secPoint }) {
+//   const firstPoint = [37.62223449719688, 55.72907987721382];
+//   const secPoint = [37.579662475884135, 55.72366633640476];
   //   const markers = [firstPoint, secPoint];
   const desperation = async () => {
     const mapglAPI = await load();
@@ -14,7 +14,6 @@ export default function MapCard({ firstPoint, secPoint}) {
     //   zoom: 15,
     //   key: 'd73d7bb4-4ee2-4388-b740-33bf53a2c2a7',
     // });
-    console.log('ololo')
     const map = await new mapglAPI.Map('conteiner-map', {
       center: firstPoint,
       zoom: 14,
