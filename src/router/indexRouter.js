@@ -18,4 +18,12 @@ router.get('/:route/newReview', (req, res) => {
   res.render('Layout', {});
 });
 
+router.get('/myRoutes', (req, res) => {
+  res.render('Layout', {});
+});
+
+router.get('/newRoute', (req, res) => {
+  res.render('Layout', {});
+});
+
 export default router;
