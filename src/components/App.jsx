@@ -7,8 +7,6 @@ import MainPage from './MainPage';
 import Header from './Header';
 import Registration from './Registration';
 import Authorization from './Authorization';
-import MapCard from './MapCard';
-import MapCardAdd from './MapCardAdd';
 
 export default function App() {
   return (
@@ -16,8 +14,6 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/map" element={<MapCard />} />
-        <Route path="/addmap" element={<MapCardAdd />} />
         <Route path="/auth/registration" element={<Registration />} />
         <Route path="/auth/authorization" element={<Authorization />} />
       </Routes>
