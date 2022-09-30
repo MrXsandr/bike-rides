@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Registration from './Registration';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import Reviews from './Reviews';
-import Route from './Route';
 
-export default function OneRoute({ route }) {
+export default function OneRoute({ route, currUser }) {
   const { routeId } = useParams();
   const [oneRoute, setOneRoute] = useState([]);
   useEffect(() => {
@@ -14,32 +12,45 @@ export default function OneRoute({ route }) {
         .then((data) => setOneRoute(data));
     }
   }, []);
+
+  const [addedReview, setAddedReview] = useState('');
+
+  useEffect(() => {
+    fetch(`/api/v1/routes/${routeId}`)
+      .then((res) => res.json())
+      .then((data) => setAddedReview(data));
+  }, []);
+
   return (
     <div>
       <img style={{ width: '600px', margin: '20px 0px' }} src="https://russia-travel-tips.com/wp-content/uploads/2020/03/plan-de-moscou-avec-monuments.jpg" />
-      <h4>
+      <h5>
         Название:
         {' '}
         {oneRoute.title}
-      </h4>
-      <h4>
+      </h5>
+      <h5>
         Длина маршрута:
         {' '}
         {oneRoute.length}
-      </h4>
-      <h4>
+      </h5>
+      <h5>
         Населенный пункт:
         {' '}
         {oneRoute.city}
-      </h4>
+      </h5>
+
+      {currUser?.id && <Link to={`/${routeId}/newReview`} params={{ routeId, currUser }}><button type="submit">Добавить отзыв</button></Link> }
+
       <h1 style={{
-        color: '#A2B4AC', marginTop: '20px', marginBottom: '20px',
+        color: '#A2B4AC', marginTop: '20px', marginBottom: '10px',
       }}
       >
         Отзывы о маршруте
       </h1>
-
-      <Reviews routeId={oneRoute.id} />
+      <Reviews routeId={routeId} />
     </div>
   );
 }
+
+// WHY routeId != oneRoute.id ???

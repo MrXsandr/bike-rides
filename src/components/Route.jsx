@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export default function Route({ route }) {
+export default function Route({ route, currUser }) {
   return (
     <div className="col-5 mt-4">
       <div className="card">

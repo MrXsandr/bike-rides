@@ -7,12 +7,11 @@ import {
 import Registration from './Registration';
 
 export default function Header({ currUser, logOutHandler }) {
-  console.log('HEADER USER ________________>', currUser);
   return (
     <Navbar sticky="top" collapseOnSelect expand="lg" bg="success" variant="dark">
       <Container style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
         <Navbar.Brand href="/">
-          Biking
+          Велопрогулки
         </Navbar.Brand>
         {currUser.id ? (
           <Navbar.Text>
@@ -20,7 +19,7 @@ export default function Header({ currUser, logOutHandler }) {
             {' '}
             {currUser.name}
           </Navbar.Text>
-        ) : ((<Navbar.Text>Привет, гость!</Navbar.Text>))}
+        ) : ((<Navbar.Text style={{ color: 'red' }}>Привет, гость!</Navbar.Text>))}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="container-fluid">
           <Nav>

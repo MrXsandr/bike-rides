@@ -1,15 +1,15 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 export default function OneReview({ review }) {
   return (
-    <li className="entry-item pad-b-4">
-      <Card>
-        <p className="entry-stub">
-          {review.title}
-        </p>
-        <p className="entry-stub">{review.text}</p>
-      </Card>
-    </li>
+
+    <div style={{
+      marginTop: '10px', marginBottom: '20px', fontSize: '14px', color: 'chocolate',
+    }}
+    >
+      <span>{review.text}</span>
+    </div>
   );
 }
