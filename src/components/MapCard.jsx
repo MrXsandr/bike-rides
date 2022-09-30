@@ -14,6 +14,7 @@ export default function MapCard({}) {
     //   zoom: 15,
     //   key: 'd73d7bb4-4ee2-4388-b740-33bf53a2c2a7',
     // });
+    console.log('ololo')
     const map = await new mapglAPI.Map('conteiner-map', {
       center: firstPoint,
       zoom: 14,
