@@ -49,7 +49,6 @@ router.route('/auth/authorization')
 // Найти все маршруты
 router.get('/routes', async (req, res) => {
   const routes = await Route.findAll();
-  console.log(routes);
   res.json(routes);
 });
 
@@ -61,15 +60,28 @@ router.get('/routes/:route', async (req, res) => {
   return res.json(routeReviews);
 });
 
-// Вывести список отзывов для данного маршрута
 router.get('/routes/:route/reviews', async (req, res) => {
   const routeReviews = await Review.findAll({
-    include: [{
-      model: Route,
-      where: { id: req.params.route },
-    }],
+    where: { routeid: req.params.route },
   });
   return res.json(routeReviews);
+});
+
+// Написать отзыв
+router.post('/routes/:route/addReview', async (req, res) => {
+  const { title, text } = req.body;
+  const routeid = req.params.route;
+  const userid = req.session.user.id;
+  if (title && text) {
+    try {
+      const review = await Review.create({ ...req.body, routeid, userid });
+      return res.json(review);
+    } catch {
+      return res.sendStatus(500);
+    }
+  } else {
+    return res.sendStatus(401);
+  }
 });
 
 export default router;
