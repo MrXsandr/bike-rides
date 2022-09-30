@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { Link } from 'react-router-dom';
 import Route from './Route';
 
 export default function MainPage({ currUser }) {
@@ -13,11 +12,11 @@ export default function MainPage({ currUser }) {
         .then((res) => res.json())
         .then((routesArr) => setRoutes(routesArr));
     }
-  }, []);
+  }, [routes]);
   return (
     <>
       {currUser?.id ? (
-        <Button className="m-5" variant="outline-success" size="lg">Мои маршруты</Button>
+        <Link to="/myRoutes"><Button className="m-5" variant="outline-success" size="lg">Мои маршруты</Button></Link>
       )
         : (
           <Button className="m-5" variant="outline-success" size="lg">

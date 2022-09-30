@@ -6,7 +6,6 @@ export default function AddReview({ currUser }) {
   const [newReview, setNewReview] = useState({});
 
   const { route } = useParams();
-  console.log('!!!!!', route);
 
   const inputHandler = (e) => {
     setNewReview((prev) => ({ ...prev, [e.target.name]: e.target.value }));

@@ -52,6 +52,16 @@ router.get('/routes', async (req, res) => {
   res.json(routes);
 });
 
+// Найти все маршруты одного пользователя
+router.get('/myRoutes', async (req, res) => {
+  console.log(req.session.user.id);
+  const routes = await Route.findAll({
+    where: { userid: req.session.user.id },
+  });
+  console.log('THIS IS FETCH FOR MY ROUTES---------->', routes);
+  res.json(routes);
+});
+
 // Показать один маршрут
 router.get('/routes/:route', async (req, res) => {
   const routeReviews = await Route.findOne({
@@ -76,6 +86,22 @@ router.post('/routes/:route/addReview', async (req, res) => {
     try {
       const review = await Review.create({ ...req.body, routeid, userid });
       return res.json(review);
+    } catch {
+      return res.sendStatus(500);
+    }
+  } else {
+    return res.sendStatus(401);
+  }
+});
+
+// Создать новый маршрут
+router.post('/newRoute', async (req, res) => {
+  const { title, length, city } = req.body;
+  const userid = req.session.user.id;
+  if (title && length && city) {
+    try {
+      const route = await Route.create({ ...req.body, userid });
+      return res.json(route);
     } catch {
       return res.sendStatus(500);
     }

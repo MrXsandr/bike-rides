@@ -9,7 +9,7 @@ export default function Reviews({ currUser, routeId }) {
       .then((res) => res.json())
       .then((data) => setReviewsArr(data));
   }, []);
-  console.log('IS IT THIS???', routeId);
+
   return (
     <div>
       {reviewsArr?.map((el) => <OneReview key={el.id} review={el} />)}
