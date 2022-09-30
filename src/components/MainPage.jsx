@@ -27,29 +27,8 @@ export default function MainPage({ currUser }) {
         )}
 
       <Row xs={1} md={3} className="g-4">
-        {routes?.map((el) => <Route key={el.id} route={el} />)}
+        {routes?.map((el) => <Route currUser={currUser} key={el.id} route={el} />)}
       </Row>
-
-      {/* <Row bg="light" xs={1} md={2} className="g-4">
-        {Array.from({ length: 4 }).map((_, idx) => (
-          <Col className=" px-4">
-            <Card>
-              <Card.Img variant="top" src="" />
-              <Card.Body>
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </Card.Text>
-              </Card.Body>
-              <Button variant="primary">
-                Информация о маршруте
-              </Button>
-            </Card>
-          </Col>
-        ))}
-      </Row> */}
     </>
   );
 }
