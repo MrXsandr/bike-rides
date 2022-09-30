@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import MapCard from './MapCard';
 import Reviews from './Reviews';
 
 export default function OneRoute({ route, currUser }) {
   const { routeId } = useParams();
-  const [oneRoute, setOneRoute] = useState([]);
+  const [oneRoute, setOneRoute] = useState(route || []);
+
   useEffect(() => {
     if (oneRoute.length < 1) {
       fetch(`/api/v1/routes/${routeId}`)
@@ -20,10 +22,21 @@ export default function OneRoute({ route, currUser }) {
       .then((res) => res.json())
       .then((data) => setAddedReview(data));
   }, []);
+  // const firstPoint = [oneRoute?.startX, oneRoute?.startY];
+  // const secPoint = [oneRoute?.endX, oneRoute?.endY];
 
   return (
     <div>
-      <img style={{ width: '600px', margin: '20px 0px' }} src="https://russia-travel-tips.com/wp-content/uploads/2020/03/plan-de-moscou-avec-monuments.jpg" />
+      {/* <img style={{ width: '600px', margin: '20px 0px' }} src="https://russia-travel-tips.com/wp-content/uploads/2020/03/plan-de-moscou-avec-monuments.jpg" /> */}
+      {oneRoute?.startX ? (
+        <MapCard
+          firstPoint={[oneRoute.startX, oneRoute.startY]}
+          secPoint={[oneRoute.endX, oneRoute.endY]}
+        />
+      )
+        : (
+          <div />
+        )}
       <h5>
         Название:
         {' '}

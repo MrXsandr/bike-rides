@@ -69,6 +69,12 @@ router.get('/routes/:route', async (req, res) => {
   });
   return res.json(routeReviews);
 });
+router.delete('/routes/:route', async (req, res) => {
+  await Route.destroy({
+    where: { id: req.params.route },
+  });
+  return res.sendStatus(200);
+});
 
 router.get('/routes/:route/reviews', async (req, res) => {
   const routeReviews = await Review.findAll({
@@ -96,7 +102,10 @@ router.post('/routes/:route/addReview', async (req, res) => {
 
 // Создать новый маршрут
 router.post('/newRoute', async (req, res) => {
-  const { title, length, city } = req.body;
+  console.log(req.body);
+  const {
+    title, length, city, startX, startY, endX, endY,
+  } = req.body;
   const userid = req.session.user.id;
   if (title && length && city) {
     try {
